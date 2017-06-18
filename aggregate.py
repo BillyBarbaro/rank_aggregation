@@ -1,4 +1,4 @@
-""" This is a command line runner for rank aggregation. 
+""" This is a command line runner for rank aggregation.
     Author: Sibel Adali
 
     To learn about how to run, simply type:
@@ -38,21 +38,12 @@ def print_error(msg):
     print
     sys.exit()
 
-if __name__ == "__main__":
-    start = time.time()
-    if len(sys.argv) <3:
-        print_menu()
-        sys.exit()
-
-    fname = sys.argv[1]
+def main(fname, agg, arguments):
     try:
         (objects,ranker_names) = r.read_rankers(fname)
     except:
         print_error("Incorrect file provided, cannot read rankers")
 
-    agg = sys.argv[2]
-    arguments = sys.argv[3:]
-    
     lastloc = 0
     if agg == 'pg':
         alpha = 0.85
@@ -124,3 +115,11 @@ if __name__ == "__main__":
     print
     print "Took %.2f seconds" % (end-start)
     print
+
+
+if __name__ == "__main__":
+    start = time.time()
+    if len(sys.argv) <3:
+        print_menu()
+        sys.exit()
+    main(sys.argv[1], sys.argv[2], sys.argv[3:])
