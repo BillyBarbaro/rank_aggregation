@@ -52,7 +52,7 @@ def read_rankers(fname):
     for line in f:
         oid += 1
         m = line.strip().split(",")
-        objects[m[0]] = list(map(int, m[1:]))
+        objects[m[0]] = list(map(lambda x: int(float(x)) if x else None, m[1:]))
     return objects, ranker_names
 
 
